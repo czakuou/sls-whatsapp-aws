@@ -1,0 +1,35 @@
+service: whatsapppush
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: eu-central-1
+
+custom:
+  tableName: 'Templates'
+
+
+functions:
+  hello:
+    handler: handler.hello
+
+
+resources:
+  Resources:
+    MyDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableName}
+        AttributeDefinitions:
+          - AttributeName: user_id
+            AttributeType: S
+          - AttributeName: template_id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: user_id
+            KeyType: HASH
+          - AttributeName: template_id
+            KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
