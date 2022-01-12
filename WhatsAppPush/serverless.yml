@@ -1,5 +1,5 @@
 service: whatsapppush
-frameworkVersion: '2'
+frameworkVersion: "2"
 
 provider:
   name: aws
@@ -14,13 +14,11 @@ package:
   individually: true
 
 custom:
-  tableName: 'Templates'
-
+  tableName: Templates
 
 functions:
   hello:
     handler: handler.hello
-
 
 resources:
   Resources:

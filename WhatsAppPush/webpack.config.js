@@ -1,4 +1,4 @@
 module.exports = {
-  target: 'node',
-  mode: 'none',
-}
+  target: "node",
+  mode: "none",
+};

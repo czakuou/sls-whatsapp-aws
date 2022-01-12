@@ -1,26 +1,25 @@
-const Responses = require('./APIResponses')
+const Responses = require("./APIResponses");
 
-export.handler = async event => {
-  console.log('event', event)
+exports.handler = async (event) => {
+  console.log("event", event);
 
   if (!event.pathParameters || !event.PathParameters.ID) {
     // failed withoud an ID
-    return Responses._400({message: 'missing the ID from the path'})
+    return Responses._400({ message: "missing the ID from the path" });
   }
 
-  let ID = event.pathParameters.ID
+  let ID = event.pathParameters.ID;
 
-  if(data[ID]) {
+  if (data[ID]) {
     // return the data
-    return Responses._200(data[ID])
+    return Responses._200(data[ID]);
   }
 
   // failed as ID not in the data
-}
-
+};
 
 const data = {
-  1234: {name: 'Anna Jones', age: 25, job: 'journalist'},
-  7893: {name: 'Chris Smith', age: 52, job: 'teacher'},
-  5132: {name: 'Tom Hague', age: 23, job: 'plasterer'}
-}
+  1234: { name: "Anna Jones", age: 25, job: "journalist" },
+  7893: { name: "Chris Smith", age: 52, job: "teacher" },
+  5132: { name: "Tom Hague", age: 23, job: "plasterer" },
+};
