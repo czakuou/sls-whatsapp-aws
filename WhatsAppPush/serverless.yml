@@ -7,6 +7,12 @@ provider:
   lambdaHashingVersion: 20201221
   region: eu-central-1
 
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
 custom:
   tableName: 'Templates'
 
