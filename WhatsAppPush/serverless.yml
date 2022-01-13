@@ -30,6 +30,12 @@ functions:
       - http:
           path: /templates
           method: post
+  UpdateTemplate:
+    handler: lambdas/endpoints/UpdateTemplates.handler
+    events:
+      - http:
+          path: /templates/{user_id}/{template_id}
+          method: put
 
 resources:
   Resources:
