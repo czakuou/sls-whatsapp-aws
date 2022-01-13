@@ -1,24 +1,26 @@
 const Responses = require("../common/templates");
-const Dynamo = require("../common/Dynamo");
-const { v1: uuidv1, v4: uuidv4 } = require("uuid");
+const Dynamo = require("../../db/Dynamo");
+const { v4: uuidv4 } = require("uuid");
+const schema = require("../../db/schemas");
 
 const tableName = process.env.tableName;
 
 exports.handler = async (event) => {
-  console.log("event", event);
-  console.log("table name", tableName);
-
-  let template_id = uuidv4();
+  // TODO add idemoitent_key
   const data = JSON.parse(event.body);
-  data.template_id = template_id;
-  console.log("data", data);
+  const { error } = schema.createTemplate.validate(data);
+
+  if (error) {
+    return Responses._400({ message: error.details[0].message });
+  }
+
+  data.template_id = uuidv4();
 
   const newTemplate = await Dynamo.write(data, tableName).catch((err) => {
     console.log("error in dynamo write", err);
     return null;
   });
 
-  console.log("newTemplate", newTemplate);
   if (!newTemplate) {
     return Responses._400({ message: "Failed to post data" });
   }

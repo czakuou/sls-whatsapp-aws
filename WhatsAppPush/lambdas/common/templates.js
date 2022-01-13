@@ -1,7 +1,9 @@
+const status = require("http-status");
+
 const Responses = {
   _200(data = {}) {
     return {
-      statusCode: 200,
+      statusCode: status.OK,
       body: JSON.stringify(data),
       isBase64Encoded: false,
     };
@@ -9,7 +11,7 @@ const Responses = {
 
   _400(data = {}) {
     return {
-      statusCode: 400,
+      statusCode: status.INTERNAL_SERVER_ERROR,
       body: JSON.stringify(data),
       isBase64Encoded: false,
     };
