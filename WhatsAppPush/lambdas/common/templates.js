@@ -1,27 +1,17 @@
-const status = require("http-status");
-
 const Responses = {
   _200(data = {}) {
     return {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Methods": "*",
-        "Access-Control-Allow-Origin": "*",
-      },
-      statusCode: status.SUCCESSFUL,
+      statusCode: 200,
       body: JSON.stringify(data),
+      isBase64Encoded: false,
     };
   },
 
   _400(data = {}) {
     return {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Methods": "*",
-        "Access-Control-Allow-Origin": "*",
-      },
-      statusCode: status.CLIENT_ERROR,
+      statusCode: 400,
       body: JSON.stringify(data),
+      isBase64Encoded: false,
     };
   },
 };
