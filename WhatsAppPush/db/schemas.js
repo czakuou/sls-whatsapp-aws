@@ -10,6 +10,8 @@ const Schema = {
   updateTemplate: Joi.object().keys({
     user_id: Joi.string().required(),
     template_id: Joi.string().required(),
+    template_name: Joi.string().optional(),
+    message: Joi.string().optional(),
   }),
 };
 

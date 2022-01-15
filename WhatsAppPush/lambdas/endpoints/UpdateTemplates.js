@@ -6,12 +6,16 @@ const tableName = process.env.tableName;
 
 exports.handler = async (event) => {
   const data = JSON.parse(event.body);
-  // TODO add correct validation
 
   data.template_id = event.pathParameters.template_id;
   data.user_id = event.pathParameters.user_id;
 
-  const updatedTemplate = await Dynamo.write(data, tableName).catch((err) => {
+  const { error } = schema.updateTemplate.validate(data);
+  if (error) {
+    return Responses._400({ message: error.details[0].message });
+  }
+
+  const updatedTemplate = await Dynamo.update(data, tableName).catch((err) => {
     console.log("error in dynamo update", err);
     return null;
   });
