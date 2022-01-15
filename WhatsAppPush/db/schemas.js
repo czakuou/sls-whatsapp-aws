@@ -7,11 +7,16 @@ const Schema = {
     message: Joi.string().required(),
   }),
 
-  updateTemplate: Joi.object().keys({
+  updateSchema: Joi.object().keys({
     user_id: Joi.string().required(),
     template_id: Joi.string().required(),
     template_name: Joi.string().optional(),
     message: Joi.string().optional(),
+  }),
+
+  deleteSchema: Joi.object().keys({
+    user_id: Joi.string().required(),
+    template_id: Joi.string().required(),
   }),
 };
 

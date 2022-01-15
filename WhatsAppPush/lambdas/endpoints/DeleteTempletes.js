@@ -13,26 +13,23 @@ exports.handler = async (event) => {
     });
   }
 
-  if (!event.body) {
-    return Responses._400({ message: "You have to provide a body" });
-  }
-  const data = JSON.parse(event.body);
+  const data = {
+    template_id: template_id,
+    user_id: user_id,
+  };
 
-  data.template_id = template_id;
-  data.user_id = user_id;
-
-  const { error } = schema.updateSchema.validate(data);
+  const { error } = schema.deleteSchema.validate(data);
   if (error) {
     return Responses._400({ message: error.details[0].message });
   }
 
-  const updatedTemplate = await Dynamo.update(data, tableName).catch((err) => {
-    console.log("error in dynamo update", err);
+  const deletedTemplate = await Dynamo.delete(data, tableName).catch((err) => {
+    console.log("error in dynamo delete", err);
     return null;
   });
 
-  if (!updatedTemplate) {
-    return Responses._400({ message: "Failed to update data" });
+  if (!deletedTemplate) {
+    return Responses._400({ message: "Failed to delete data" });
   }
-  return Responses._200({ updatedTemplate });
+  return Responses._200({ message: "OK" });
 };

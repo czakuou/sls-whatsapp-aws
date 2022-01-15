@@ -42,6 +42,26 @@ const Dynamo = {
 
     return data;
   },
+
+  async delete(data, TableName) {
+    const params = {
+      TableName,
+      Key: {
+        user_id: data.user_id,
+        template_id: data.template_id,
+      },
+    };
+
+    const res = await documentClient.delete(params).promise();
+
+    if (!res) {
+      throw Error(
+        `There was an error deleting template_id of ${data.template_id} in table ${TableName}`
+      );
+    }
+
+    return data;
+  },
 };
 
 module.exports = Dynamo;

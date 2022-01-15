@@ -7,6 +7,9 @@ const tableName = process.env.tableName;
 
 exports.handler = async (event) => {
   // TODO add idemoitent_key
+  if (!event.body) {
+    return Responses._400({ message: "You have to provide a body" });
+  }
   const data = JSON.parse(event.body);
   const { error } = schema.createTemplate.validate(data);
 
