@@ -23,13 +23,13 @@ exports.handler = async (event) => {
     return Responses._400({ message: error.details[0].message });
   }
 
-  const deletedTemplate = await Dynamo.delete(data, tableName).catch((err) => {
-    console.log("error in dynamo delete", err);
+  const detailsTemplate = await Dynamo.get(data, tableName).catch((err) => {
+    console.log("error in dynamo get", err);
     return null;
   });
 
-  if (!deletedTemplate) {
-    return Responses._400({ message: "Failed to delete data" });
+  if (!detailsTemplate) {
+    return Responses._400({ message: "Failed to get data" });
   }
-  return Responses._200({ message: "OK" });
+  return Responses._200({ detailsTemplate });
 };

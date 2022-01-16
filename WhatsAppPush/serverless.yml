@@ -30,18 +30,35 @@ functions:
       - http:
           path: /templates
           method: post
+          cors: true
   UpdateTemplate:
     handler: lambdas/endpoints/UpdateTemplates.handler
     events:
       - http:
           path: /templates/{user_id}/{template_id}
           method: put
+          cors: true
   DeleteTemplate:
     handler: lambdas/endpoints/DeleteTempletes.handler
     events:
       - http:
           path: /templates/{user_id}/{template_id}
           method: delete
+          cors: true
+  DetailsTemplate:
+    handler: lambdas/endpoints/DetailsTemplates.handler
+    events:
+      - http:
+          path: /templates/{user_id}/{template_id}
+          method: get
+          cors: true
+  ListTemplate:
+    handler: lambdas/endpoints/ListTemplates.handler
+    events:
+      - http:
+          path: /templates/{user_id}
+          method: get
+          cors: true
 
 resources:
   Resources:

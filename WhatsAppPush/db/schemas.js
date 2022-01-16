@@ -14,7 +14,7 @@ const Schema = {
     message: Joi.string().optional(),
   }),
 
-  deleteSchema: Joi.object().keys({
+  itemIdSchema: Joi.object().keys({
     user_id: Joi.string().required(),
     template_id: Joi.string().required(),
   }),
