@@ -1,23 +1,33 @@
-const Joi = require("joi");
-
 const Schema = {
-  createTemplate: Joi.object().keys({
-    user_id: Joi.string().required(),
-    template_name: Joi.string().required(),
-    message: Joi.string().required(),
-  }),
+  createTemplate: {
+    properties: {
+      user_id: { type: "string" },
+      template_name: { type: "string" },
+      message: { type: "string" },
+    },
+    required: ["user_id", "template_name", "message"],
+    additionalProperties: false,
+  },
 
-  updateSchema: Joi.object().keys({
-    user_id: Joi.string().required(),
-    template_id: Joi.string().required(),
-    template_name: Joi.string().optional(),
-    message: Joi.string().optional(),
-  }),
+  updateSchema: {
+    properties: {
+      user_id: { type: "string" },
+      template_id: { type: "string" },
+      template_name: { type: "string" },
+      message: { type: "string" },
+    },
+    required: ["user_id", "template_id", "template_name", "message"],
+    additionalProperties: false,
+  },
 
-  itemIdSchema: Joi.object().keys({
-    user_id: Joi.string().required(),
-    template_id: Joi.string().required(),
-  }),
+  itemIdSchema: {
+    properties: {
+      user_id: { type: "string" },
+      template_id: { type: "string" },
+    },
+    required: ["user_id", "template_id"],
+    additionalProperties: false,
+  },
 };
 
 module.exports = Schema;

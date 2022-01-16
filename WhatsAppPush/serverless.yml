@@ -15,7 +15,7 @@ provider:
       Resource: "*"
 
 plugins:
-  - serverless-webpack
+  - serverless-esbuild
 
 package:
   individually: true
@@ -25,35 +25,35 @@ custom:
 
 functions:
   CreateTamplate:
-    handler: lambdas/endpoints/CreateTemplates.handler
+    handler: lambdas/handlers/templates.postHandler
     events:
       - http:
           path: /templates
           method: post
           cors: true
   UpdateTemplate:
-    handler: lambdas/endpoints/UpdateTemplates.handler
+    handler: lambdas/handlers/templates.updateHandler
     events:
       - http:
           path: /templates/{user_id}/{template_id}
           method: put
           cors: true
   DeleteTemplate:
-    handler: lambdas/endpoints/DeleteTempletes.handler
+    handler: lambdas/handlers/templates.deleteHandler
     events:
       - http:
           path: /templates/{user_id}/{template_id}
           method: delete
           cors: true
   DetailsTemplate:
-    handler: lambdas/endpoints/DetailsTemplates.handler
+    handler: lambdas/handlers/templates.getHandler
     events:
       - http:
           path: /templates/{user_id}/{template_id}
           method: get
           cors: true
   ListTemplate:
-    handler: lambdas/endpoints/ListTemplates.handler
+    handler: lambdas/handlers/templates.listHandler
     events:
       - http:
           path: /templates/{user_id}

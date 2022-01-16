@@ -1,7 +1,7 @@
 const status = require("http-status");
 
 const Responses = {
-  _200(data = {}) {
+  handleSucces(data = {}) {
     return {
       statusCode: status.OK,
       body: JSON.stringify(data),
@@ -9,9 +9,9 @@ const Responses = {
     };
   },
 
-  _400(data = {}) {
+  handleFailure(statusCode = status.BAD_REQUEST, data = {}) {
     return {
-      statusCode: status.INTERNAL_SERVER_ERROR,
+      statusCode,
       body: JSON.stringify(data),
       isBase64Encoded: false,
     };
