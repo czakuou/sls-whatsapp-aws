@@ -1,8 +1,8 @@
 const AWS = require("aws-sdk");
 
-const documentClient = new AWS.DynamoDB.DocumentClient();
+const documentClient = new AWS.DynamoClientDB.DocumentClient();
 
-const Dynamo = {
+const DynamoClient = {
   async write(data, TableName) {
     const params = {
       TableName,
@@ -104,4 +104,4 @@ const Dynamo = {
   },
 };
 
-module.exports = Dynamo;
+module.exports = DynamoClient;

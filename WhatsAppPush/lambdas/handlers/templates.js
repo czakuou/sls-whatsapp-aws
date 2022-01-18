@@ -4,7 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const Responses = require("../libs/requestHandler");
 const validator = require("../libs/validator");
 const schema = require("../../db/schemas");
-const Dynamo = require("../../db/Dynamo");
+const DynamoClient = require("../../db/DynamoClient");
 const tableName = require("../../config/dynamoConfig");
 
 const templateController = {
@@ -22,7 +22,7 @@ const templateController = {
     data.template_id = uuidv4();
 
     try {
-      const newTemplate = await Dynamo.write(data, tableName);
+      const newTemplate = await DynamoClient.write(data, tableName);
 
       return Responses.handleSucces({ newTemplate });
     } catch (InternalServerError) {
@@ -50,7 +50,7 @@ const templateController = {
     validator(schema.itemIdSchema, data);
 
     try {
-      const deletedTemplate = await Dynamo.delete(data, tableName);
+      const deletedTemplate = await DynamoClient.delete(data, tableName);
 
       return Responses.handleSucces({ message: "OK" });
     } catch (InternalServerError) {
@@ -84,7 +84,7 @@ const templateController = {
     validator(schema.updateSchema, data);
 
     try {
-      const updatedTemplate = await Dynamo.update(data, tableName);
+      const updatedTemplate = await DynamoClient.update(data, tableName);
 
       return Responses.handleSucces({ updatedTemplate });
     } catch (InternalServerError) {
@@ -112,7 +112,7 @@ const templateController = {
     validator(schema.itemIdSchema, data);
 
     try {
-      const detailsTemplate = await Dynamo.get(data, tableName);
+      const detailsTemplate = await DynamoClient.get(data, tableName);
 
       return Responses.handleSucces({ detailsTemplate });
     } catch (InternalServerError) {
@@ -135,7 +135,7 @@ const templateController = {
     }
 
     try {
-      const listTemplates = await Dynamo.list(user_id, tableName);
+      const listTemplates = await DynamoClient.list(user_id, tableName);
 
       return Responses.handleSucces({ listTemplates });
     } catch (InternalServerError) {
